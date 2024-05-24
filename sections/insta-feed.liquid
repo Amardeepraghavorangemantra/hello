@@ -1,0 +1,443 @@
+<div class="custom_main-section section_id_{{section.id}} page-width">
+  <div class="container1 insta-custom">
+    <div class="text-center">
+      <h3 class="title_heading collage-wrapper-title inline-richtext h2 scroll-trigger animate--slide-in">
+        {{ section.settings.title }}
+      </h3>
+    </div>
+
+    <div class="gallery {% if section.settings.slider_gallery == true %} dynamic-slider-enable{% endif %}">
+      {% for block in section.blocks %}
+        {% if block.settings.image != blank %}
+          <div class="gallery-item" tabindex="0">
+            {% if block.settings.collection_url != blank %}
+              <a href="{{ block.settings.collection_url }}" title="" target="_blank">
+            {%- endif %}
+            <img
+              loading="lazy"
+              src="{{ block.settings.image | img_url: '480x' }}"
+              class="gallery-image"
+              alt=""
+              title=""
+              height="100%"
+              width="100%"
+            >
+            {% if block.settings.title != blank %}
+              <div class="gallery-item-info">
+                <span class="visually-hidden"></span>
+                <p>{{ block.settings.title }}</p>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if block.settings.collection_url != blank %}
+          </a>
+        {%- endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" async></script>
+<script>
+   $(document).ready(function(){
+      $('.section_id_{{section.id}} .dynamic-slider-enable').slick({
+          slidesToShow: {{ section.settings.slidesToShow }},
+          slidesToScroll: {{ section.settings.slidesToScroll }},
+          infinite: {{ section.settings.infinite }},
+          arrows: {{ section.settings.arrows }},
+          autoplaySpeed: {{ section.settings.autoplaySpeed }},
+          dots: false,
+          prevArrow: '<button class="custom_slick_btn slick-prev slick-arrow" style="color:#333;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"style="height:30px;width:30px"><path d="M0-.25H24v24H0Z" transform="translate(0 0.25)" style="fill:none"></path><polyline points="14.4 7.03 9 12.43 14.4 17.83" style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-miterlimit:8;stroke-width:2px"></polyline></svg></button>',
+          nextArrow: '<button class="custom_slick_btn slick-next slick-arrow" style="color:#333;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height:30px;width:30px"><path d="M0-.25H24v24H0Z" transform="translate(0 0.25)" style="fill:none"></path><polyline points="10 17.83 15.4 12.43 10 7.03" style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-miterlimit:8;stroke-width:2px"></polyline></svg></button>',
+          responsive: [
+              {
+                  "breakpoint": 1025,
+                  "settings": {
+                      slidesToShow: {{ section.settings.tslidesToShow }},
+                      slidesToScroll: {{ section.settings.tslidesToScroll }},
+                      infinite: {{ section.settings.tinfinite }},
+                      autoplay: {{ section.settings.tautoplay }},
+                      autoplaySpeed: {{ section.settings.tautoplaySpeed }}
+                  }
+              },
+              {
+                  "breakpoint": 768,
+                  "settings": {
+                      slidesToShow: {{ section.settings.mslidesToShow }},
+                      slidesToScroll: {{ section.settings.mslidesToScroll }},
+                      infinite: {{ section.settings.minfinite }},
+                      autoplay: {{ section.settings.mautoplay }},
+                      autoplaySpeed: {{ section.settings.mautoplaySpeed }},
+                      dots: {{ section.settings.mdots }}
+                  }
+              },
+             {
+                  "breakpoint": 500,
+                  "settings": {
+                      slidesToShow: 1,
+                      slidesToScroll:1,
+                      infinite: {{ section.settings.minfinite }},
+                      autoplay: {{ section.settings.mautoplay }},
+                      autoplaySpeed: {{ section.settings.mautoplaySpeed }},
+                      dots: {{ section.settings.mdots }}
+                  }
+              }
+          ]
+      });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Influencer Review"
+      },
+    {
+      "type": "header",
+      "content": "Dynamic Slider Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "slider_gallery",
+        "label": "Slider Enable",
+        "default": true
+      },
+      {
+      "type": "range",
+      "id": "slidesToShow",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "label": "Slides To Show",
+      "default": 3
+      },
+      {
+      "type": "range",
+      "id": "slidesToScroll",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Slides To Scroll",
+      "default": 1
+      },
+       {
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Slider infinite",
+        "default": true
+      },
+       {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Slides Arrows",
+        "default": true
+      },
+       {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Slider Autoplay",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "autoplaySpeed",
+        "min": 2000,
+        "max": 8000,
+        "step": 1000,
+        "label": "Slides Auto play Speed",
+        "default": 2000
+      },
+      {
+        "type": "header",
+        "content": "Settings 1024"
+      },
+      {
+      "type": "range",
+      "id": "tslidesToShow",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Slides To Show",
+      "default": 3
+      },
+      {
+      "type": "range",
+      "id": "tslidesToScroll",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Slides To Scroll",
+      "default": 1
+      },
+      {
+      "type": "checkbox",
+      "id": "tinfinite",
+      "label": "Slider infinite",
+      "default": true
+      },
+      {
+      "type": "checkbox",
+      "id": "tarrows",
+      "label": "Slides Arrows",
+      "default": true
+      },
+      {
+      "type": "checkbox",
+      "id": "tautoplay",
+      "label": "Slider Autoplay",
+      "default": true
+      },
+      {
+      "type": "range",
+      "id": "tautoplaySpeed",
+      "min": 2000,
+      "max": 8000,
+      "step": 1000,
+      "label": "Slides Auto play Speed",
+      "default": 2000
+      },
+      {
+        "type": "header",
+        "content": "Settings 768"
+      },
+           {
+        "type": "range",
+        "id": "mslidesToShow",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "label": "Slides To Show",
+        "default": 2
+      },
+       {
+        "type": "range",
+        "id": "mslidesToScroll",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "label": "Slides To Scroll",
+        "default": 1
+      },
+       {
+        "type": "checkbox",
+        "id": "minfinite",
+        "label": "Slider infinite",
+        "default": true
+      },
+       {
+        "type": "checkbox",
+        "id": "marrows",
+        "label": "Slides Arrows",
+        "default": true
+      },
+       {
+        "type": "checkbox",
+        "id": "mautoplay",
+        "label": "Slider Autoplay",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "mautoplaySpeed",
+        "min": 2000,
+        "max": 8000,
+        "step": 1000,
+        "label": "Slides Auto play Speed",
+        "default": 2000
+      },
+      {
+        "type": "checkbox",
+        "id": "mdots",
+        "label": "Slider Bullets",
+        "default": false
+      },
+       {
+        "type": "header",
+        "content": "Desktop Grid"
+      },
+      {
+        "type": "select",
+        "id": "desktop-grid",
+        "label": "Desktop Grid",
+        "options": [
+        {
+          "value": "grid_5",
+          "label": "5"
+        },
+        {
+          "value": "grid_4",
+          "label": "4"
+        }
+      ],
+      "default": "grid_5"
+      },
+        {
+        "type": "header",
+        "content": "Mobile Grid"
+      },
+       {
+        "type": "select",
+        "id": "mobile-grid",
+        "label": "Mobile Grid",
+        "options": [
+        {
+          "value": "grid_3",
+          "label": "3"
+        },
+        {
+          "value": "grid_2",
+          "label": "2"
+        },
+          {
+          "value": "grid_1",
+          "label": "1"
+        }
+      ],
+      "default": "grid_3"
+      }
+  ],
+  "blocks": [
+  {
+    "type": "slide",
+    "name": "Insta",
+    "settings": [
+    {
+    "type":"image_picker",
+    "id":"image",
+    "label":"Image"
+    },
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+      },
+      {
+      "type": "url",
+      "id": "collection_url",
+      "label": "Collection URL"
+      }
+    ]
+  }
+    ],
+      "presets": [
+  {
+    "name": "Custom Feed "
+  }
+]
+}
+{% endschema %}
+
+<style>
+      .section_id_{{section.id}} .slick-slide .gallery-item {
+      padding-right: 20px !important;
+      }
+      .section_id_{{section.id}}   .gallery-item-info svg {
+      width: 50px;
+      height: 50px;
+      }
+      .section_id_{{section.id}}  .dynamic-slider-enable button.custom_slick_btn.slick-prev {
+      position: absolute;
+      z-index: 2;
+      left: 3%;
+      background: #ffffff87;
+      border-radius: 19%;
+      }
+      .dynamic-slider-enable button.custom_slick_btn.slick-next.slick-arrow {
+        position: absolute;
+        right: 3%;
+        background: #ffffff87;
+        border-radius: 19%;
+      }
+      .title_heading.th-1 {
+      padding: 25px 0px;
+      }
+      .custom_main-section section_id_{{section.id}} .container1{
+      padding-bottom: 30px;
+      }
+      .gallery {
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px 10px;
+      }
+      .gallery-item {
+      width: 19%;
+      margin: auto;
+      position: relative;
+      color: #fff;
+      cursor: pointer;
+      }
+      .visually-hidden {
+      position: absolute !important;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      }
+
+      .gallery-item:hover .gallery-item-info,
+      .gallery-item:focus .gallery-item-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(0 0 0 / 11%);
+      border-radius: 10px;
+      }
+
+      .gallery-item-info {
+      display: none;
+      }
+
+      @media(max-width: 1024px){
+      .custom_main-section section_id_{{section.id}} .container1 {
+      padding-left: 10px;
+      padding-right: 10px;
+      }
+
+      .gallery-item {
+      width: 24%;
+      margin: inherit;
+      margin-bottom: 7px;
+      }
+      .gallery{
+      gap: 5px 0px;
+      }
+
+      }
+
+      @media(max-width: 769px){
+      .custom_main-section section_id_{{section.id}} .container1 {
+        padding-left: 10px;
+      padding-right: 10px;
+      }
+      .gallery {
+    justify-content: flex-start !important;
+        gap: 0;
+      }
+     .gallery-item {
+        width: 50%;
+        margin-bottom: 7px;
+        padding: 5px;
+    }
+      }
+    @media (max-width: 500px) {
+      .gallery-item {
+          width: 100%;
+          margin-bottom: 7px;
+          padding: 5px;
+      }
+  }
+</style>
