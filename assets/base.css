@@ -3443,5 +3443,5 @@ details-disclosure > details {
   }
 }
 sticky-header.header-wrapper.color-scheme-1.gradient.header-wrapper--border-bottom {
-  background: red;
+  background: yellow !important;
 }
