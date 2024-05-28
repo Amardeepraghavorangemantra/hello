@@ -285,7 +285,12 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;>
+  <body
+    class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}"
+    oncontextmenu="return false"
+    onkeydown="return false;"
+    onmousedown="return false;"
+  >
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -356,16 +361,45 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     <script>
-      // inspect by f12 disable
-            $(document).keydown(function(e){
-          if(e.which === 123){
-             return false;
-          }
+                  // inspect by f12 disable
+                        $(document).keydown(function(e){
+                      if(e.which === 123){
+                         return false;
+                      }
+                  });
+                  $(document).bind("contextmenu",function(e) {
+            	e.preventDefault();
+
+            });
+            var currentHtmlContent;
+
+      var element = new Image();
+
+      var elementWithHiddenContent = document.querySelector("#element-to-hide");
+
+      var innerHtml = elementWithHiddenContent.innerHTML;
+
+
+
+      element.__defineGetter__("id", function() {
+
+          currentHtmlContent= "";
+
       });
-      $(document).bind("contextmenu",function(e) {  
-	e.preventDefault(); 
- 
-}); 
+
+
+
+      setInterval(function() {
+
+          currentHtmlContent= innerHtml;
+
+          console.log(element);
+
+          console.clear();
+
+          elementWithHiddenContent.innerHTML = currentHtmlContent;
+
+      }, 1000);
     </script>
   </body>
 </html>
