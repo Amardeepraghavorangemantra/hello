@@ -355,15 +355,17 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script>
-            $(document).keydown(function(e){
-          if(e.which === 123){
+    <!--
+      <script>
+              $(document).keydown(function(e){
+            if(e.which === 123){
 
-             return false;
+               return false;
 
-          }
+            }
 
-      });
-    </script>
+        });
+      </script>
+    -->
   </body>
 </html>
