@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="js" lang="{{ request.locale.iso_code }}" oncontextmenu="return false">
+<html class="js" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -287,9 +287,6 @@
 
   <body
     class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}"
-    oncontextmenu="return false"
-    onkeydown="return false;"
-    onmousedown="return false;"
   >
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
@@ -360,31 +357,5 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script>
-              // inspect by f12 disable
-                    $(document).keydown(function(e){
-                  if(e.which === 123){
-                     return false;
-                  }
-              });
-              $(document).bind("contextmenu",function(e) {
-        	e.preventDefault();
-
-        });
-      var currentHtmlContent;
-      var element = new Image();
-      var elementWithHiddenContent = document.querySelector("#element-to-hide");
-      var innerHtml = elementWithHiddenContent.innerHTML;
-      element.__defineGetter__("id", function() {
-      currentHtmlContent= "";
-      });
-
-      setInterval(function() {
-      currentHtmlContent= innerHtml;
-      console.log(element);
-      console.clear();
-      elementWithHiddenContent.innerHTML = currentHtmlContent;
-      }, 1000);
-    </script>
   </body>
 </html>
