@@ -169,6 +169,18 @@
                           </li>
                         {%- endfor -%}
                       </ul>
+                      ===
+                      {% if line_item.line_level_discount_allocations.size > 0 %}
+                        Discounts:
+                        <ul>
+                          {% for discount_allocation in line_item.line_level_discount_allocations %}
+                            <li>
+                              {{ discount_allocation.discount_application.title }}-
+                              {{- discount_allocation.amount | money }}
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
                     </td>
 
                     <td class="cart-item__totals right medium-hide large-up-hide">
